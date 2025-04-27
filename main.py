@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+from datetime import date
+from tabulate import tabulate
 
 def get_data():
     headers = {'user-agent':'your actual User-Agent here'}
@@ -19,4 +21,18 @@ def get_data():
 
         data = zip(titles,payments)
         return data
-get_data()
+
+    return False
+
+
+def get_text(type,name):
+    data = get_data()
+    today = date.today().strftime('%d/%m/%Y')
+
+    if data:
+        with open(f'{name}.txt','w',encoding='utf-8') as f:
+            f.write(f'Type: {type}\n')
+            f.write(f'Date: {today}\n')
+            f.write('='*48+'\n')
+            table = tabulate(data,headers=['Books','Price'],tablefmt="fancy_grid")
+            f.write(table)
