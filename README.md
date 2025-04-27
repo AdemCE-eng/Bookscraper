@@ -3,7 +3,6 @@
 **BookScraper** is a Python command-line tool that scrapes book titles and prices from [Books to Scrape](https://books.toscrape.com/). It allows you to fetch books from a specific category and save the results in a well-formatted text file or a structured JSON file.
 
 ---
-
 ## 🔧 Features
 
 - Scrapes book titles and prices by category
@@ -11,8 +10,6 @@
 - Saves results in either `.txt` (pretty table) or `.json` format
 - User-friendly and interactive command-line interface
 - Supports UTF-8 encoding for file outputs
-
----
 
 ## 📦 Requirements
 
