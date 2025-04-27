@@ -8,16 +8,16 @@ import json
 headers = {'user-agent': 'your actual User-Agent here'}
 
 def get_url(category_name):
-    url = 'https://books.toscrape.com/catalogue/category/books/travel_2/index.html'
+    url = 'https://books.toscrape.com/index.html'
     response = requests.get(url,headers=headers)
     if response.ok:
         soup = BeautifulSoup(response.content,'html.parser')
         categories_tags = soup.find('div',attrs={'class':'side_categories'})
 
-        re_categories = r'\.\.\/([\w\-]+)_\d+\/'
+        re_categories = r'(\w+)_\d+'
         categories = re.findall(re_categories,str(categories_tags))
 
-        re_num_categorie = r'\.\.\/[\w\-]+_(\d+)\/'
+        re_num_categorie = r'\w+_(\d+)'
         num_categorie = re.findall(re_num_categorie,str(categories_tags))
 
         page = list(zip(categories,num_categorie))
@@ -70,5 +70,6 @@ def get_json(category_name):
     if data:
         with open(f'{category_name}.json','w',encoding='utf-8') as f:
             json.dump(books,f,ensure_ascii=False)
+            print('File downloaded successfully!')
     else:
         return False
