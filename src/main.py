@@ -43,7 +43,9 @@ def get_data(category_name):
 
         payments = []
         for product in products:
-            payments += product.find('p',attrs = {'class':'price_color'})
+            price_tag = product.find('p', attrs={'class': 'price_color'})
+            if price_tag:
+                payments.append(price_tag.get_text())
 
         data = zip(titles,payments)
         return data
